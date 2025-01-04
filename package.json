@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "check": "biome check --write"
+    "check": "biome check --write",
+    "dev": "vite"
   },
   "keywords": [],
   "author": "Ville Takanen",
@@ -15,5 +16,9 @@
     "@types/node": "^22.10.5",
     "typescript": "^5.7.2",
     "vite": "^6.0.7"
+  },
+  "dependencies": {
+    "@lit/reactive-element": "^2.0.4",
+    "lit": "^3.2.1"
   }
 }
