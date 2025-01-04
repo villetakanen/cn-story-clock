@@ -4,9 +4,14 @@
   "description": "A form input custom element for a PbtA style story clock",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "check": "biome check --write"
   },
   "keywords": [],
-  "author": "",
-  "license": "MIT"
+  "author": "Ville Takanen",
+  "license": "MIT",
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "vite": "^6.0.7"
+  }
 }
