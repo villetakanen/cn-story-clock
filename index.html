@@ -6,6 +6,20 @@
     <title>CN Story Clock</title>
   </head>
   <body>
-    <cn-story-clock></cn-story-clock>
-    <script type="module" src="/src/cn-story-clock.ts"></script> </body>
+    <cn-story-clock name="Two Step Clock" value="1">
+      <cn-tick label="Start" value="0"></cn-tick>
+      <cn-tick label="Rising Action" value="1"></cn-tick>
+    </cn-story-clock>
+    <cn-story-clock name="Three Step Clock" value="1">
+      <cn-tick label="Start" value="0"></cn-tick>
+      <cn-tick label="Rising Action" value="1"></cn-tick>
+      <cn-tick label="Climax" value="2"></cn-tick>
+    </cn-story-clock>
+    <cn-story-clock name="Four Step Clock" value="3">
+      <cn-tick label="Start" value="0"></cn-tick>
+      <cn-tick label="Rising Action" value="1"></cn-tick>
+      <cn-tick label="Climax" value="2"></cn-tick>
+      <cn-tick label="Falling Action" value="3"></cn-tick>
+    </cn-story-clock>
+    <script type="module" src="/src/index.ts"></script> </body>
 </html>

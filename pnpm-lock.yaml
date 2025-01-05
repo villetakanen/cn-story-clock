@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@lit/reactive-element':
-        specifier: ^2.0.4
-        version: 2.0.4
       lit:
         specifier: ^3.2.1
         version: 3.2.1
