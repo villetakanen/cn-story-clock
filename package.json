@@ -1,6 +1,6 @@
 {
   "name": "cn-story-clock",
-  "version": "1.0.0-a1",
+  "version": "1.0.0-a2",
   "description": "A form input custom element for a PbtA style story clock",
   "main": "index.js",
   "scripts": {
@@ -18,6 +18,7 @@
     "vite": "^6.0.7"
   },
   "dependencies": {
-    "lit": "^3.2.1"
+    "lit": "^3.2.1",
+    "ts-key-enum": "^3.0.13"
   }
 }

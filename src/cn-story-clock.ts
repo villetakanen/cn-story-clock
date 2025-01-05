@@ -25,27 +25,24 @@ export class CnStoryClock extends LitElement {
   }
 
   static styles = css`
-  :host {
-    display: inline-block;
-  }
+    :host {
+      display: inline-block;
+    }
     .clock {
       width: 100px; /* Adjust size as needed */
       height: 100px;
       position: relative;
       background-color: var(--cn-story-clock-background, white);
     }
-
     svg {
       width: 100%;
       height: 100%;
     }
-
     .slice {
       fill: var(--cn-story-clock-slice-background, lightgray);
       stroke: var(--cn-story-clock-slice-border, black);
       stroke-width: var(--cn-story-clock-slice-border-width, 2px); 
     }
-
     .slice.ticked {
       fill: var(--cn-story-clock-slice-background-ticked, gray);
     }
@@ -102,7 +99,13 @@ export class CnStoryClock extends LitElement {
 
   render() {
     return html`
-      <div class="clock">
+      <div
+        class="clock"
+        @click="${this._handleClick}" 
+        @keydown="${this._handleKeydown}" 
+        tabindex="0" 
+        role="button"
+        aria-label="${this.name}">
         ${this.renderClock()}
         <slot></slot>
       </div>
@@ -113,5 +116,20 @@ export class CnStoryClock extends LitElement {
       ${this.ticks.map((tick, index) => html`<li>${tick.label}: ${this.getSlicePath(index, this.ticks.length)}</li>`)}
     </ul-->
     `;
+  }
+
+  private _handleClick() {
+    if (this.disabled) {
+      return;
+    }
+    this.value = this.value >= this.ticks.length ? 0 : this.value + 1;
+    this.dispatchEvent(new Event("change"));
+  }
+
+  private _handleKeydown(event: KeyboardEvent) {
+    if (event.key === "Enter" || event.key === " ") {
+      // Check for 'Enter' or space
+      this._handleClick();
+    }
   }
 }
