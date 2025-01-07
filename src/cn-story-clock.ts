@@ -2,6 +2,7 @@
 import { LitElement, css, html, svg } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import type { CnTick } from "./cn-tick";
+import "./tokens.css";
 
 @customElement("cn-story-clock")
 export class CnStoryClock extends LitElement {
