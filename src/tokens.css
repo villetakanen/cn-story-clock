@@ -6,16 +6,10 @@
  * When using the elements as a standalone component, you can modify these variables to make the
  * component fit your brand and Design System.
  */
- :root {
-   --cn-story-clock-border-color: var(--color-border,  var(--_cn-sc-border-color));
-   --cn-story-clock-border-width: var(--border-width, var(--_cn-sc-border-width));
-   --cn-story-clock-tick-color: var(--color-text, var(--_cn-sc-tick-color));
-   --cn-story-clock-slice-color: var(--color-background, var(--_cn-sc-slice-color));
- }
-
- cn-story-clock {
-   --_cn-sc-border-color: darkgray;
-   --_cn-sc-border-width: 4px;
-   --_cn-sc-tick-color: gray;
-   --_cn-sc-slice-color: lightgray;
+ body {
+  /* Cyan Design System integrations */
+   --cn-story-clock-border-color: var(--color-border);
+   --cn-story-clock-border-width: var(--cn-border-width);
+   --cn-story-clock-tick-color: var(--color-text);
+   --cn-story-clock-slice-color: var(--color-surface-1);
  }

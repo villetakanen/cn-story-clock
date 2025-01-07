@@ -28,24 +28,24 @@ export class CnStoryClock extends LitElement {
   static styles = css`
     :host {
       display: inline-block;
+      user-select: none;
     }
     .clock {
       width: 100px; /* Adjust size as needed */
       height: 100px;
       position: relative;
-      background-color: var(--cn-story-clock-background, white);
     }
     svg {
       width: 100%;
       height: 100%;
     }
     .slice {
-      fill: var(--cn-story-clock-slice-background, lightgray);
-      stroke: var(--cn-story-clock-slice-border, black);
+      fill: var(--cn-story-clock-slice-color, lightgray);
+      stroke: var(--cn-story-clock-border-color, darkgray);
       stroke-width: var(--cn-story-clock-slice-border-width, 2px); 
     }
     .slice.ticked {
-      fill: var(--cn-story-clock-slice-background-ticked, gray);
+      fill: var(--cn-story-clock-tick-color, gray);
     }
   `;
 
@@ -110,12 +110,6 @@ export class CnStoryClock extends LitElement {
         ${this.renderClock()}
         <slot></slot>
       </div>
-      <p>${this.name}: ${this.value}</p>
-
-    <!--p>Ticks:</p>
-    <ul>
-      ${this.ticks.map((tick, index) => html`<li>${tick.label}: ${this.getSlicePath(index, this.ticks.length)}</li>`)}
-    </ul-->
     `;
   }
 
