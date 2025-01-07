@@ -1,6 +1,6 @@
 {
   "name": "cn-story-clock",
-  "version": "1.0.0-a4",
+  "version": "1.0.0-a5",
   "description": "A form input custom element for a PbtA style story clock",
   "main": "index.js",
   "scripts": {

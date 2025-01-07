@@ -57,13 +57,18 @@ export class CnStoryClock extends LitElement {
     this.ticks = Array.from(ticks);
   }
 
-  getSlicePath(index: number, ticks: number) {
-    const sliceAngle = 360 / ticks;
+  getSlicePath(index: number) {
+    const totalSize = this.ticks.reduce((sum, tick) => sum + tick.size, 0);
+    let startAngle = 0;
+
+    for (let i = 0; i < index; i++) {
+      startAngle += (this.ticks[i].size / totalSize) * 360;
+    }
+
+    const sliceAngle = (this.ticks[index].size / totalSize) * 360;
     const radius = 60;
     const borderRadius = 64;
     const offset = (borderRadius - radius) / 2;
-
-    const startAngle = sliceAngle * index;
     const endAngle = startAngle + sliceAngle;
 
     const x1 = radius + radius * Math.cos((startAngle * Math.PI) / 180);
@@ -91,7 +96,7 @@ export class CnStoryClock extends LitElement {
       <g transform="rotate(-90 64 64)">
       ${this.ticks.map(
         (_tick, index) => html`
-      ${this.getSlicePath(index, this.ticks.length)}"></path>
+      ${this.getSlicePath(index)}"></path>
       `,
       )}
       </g>
