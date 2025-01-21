@@ -25,6 +25,13 @@ export class CnStoryClock extends LitElement {
     this.requestUpdate();
   }
 
+  _onSlotchange() {
+    console.log("cn-story-clock _onSlotchange called", this.name);
+    const ticks = this.querySelectorAll<CnTick>("cn-tick");
+    this.ticks = Array.from(ticks);
+    this.requestUpdate();
+  }
+
   static styles = css`
     :host {
       display: inline-block;
@@ -113,7 +120,7 @@ export class CnStoryClock extends LitElement {
         role="button"
         aria-label="${this.name}">
         ${this.renderClock()}
-        <slot></slot>
+        <slot @slotchange="${this._onSlotchange}"></slot>
       </div>
     `;
   }
