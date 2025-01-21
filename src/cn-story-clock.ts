@@ -1,12 +1,12 @@
 // cn-tick.ts
-import { LitElement, css, html, svg } from "lit";
-import { customElement, property } from "lit/decorators.js";
-import type { CnTick } from "./cn-tick";
-import "./tokens.css";
+import { LitElement, css, html, svg } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
+import type { CnTick } from './cn-tick';
+import './tokens.css';
 
-@customElement("cn-story-clock")
+@customElement('cn-story-clock')
 export class CnStoryClock extends LitElement {
-  @property({ type: String, reflect: true }) name = "";
+  @property({ type: String, reflect: true }) name = '';
   @property({ type: Number, reflect: true }) value = 0;
 
   // These two fields are for form-interaction
@@ -26,8 +26,8 @@ export class CnStoryClock extends LitElement {
   }
 
   _onSlotchange() {
-    console.log("cn-story-clock _onSlotchange called", this.name);
-    const ticks = this.querySelectorAll<CnTick>("cn-tick");
+    console.log('cn-story-clock _onSlotchange called', this.name);
+    const ticks = this.querySelectorAll<CnTick>('cn-tick');
     this.ticks = Array.from(ticks);
     this.requestUpdate();
   }
@@ -58,9 +58,9 @@ export class CnStoryClock extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    console.log("cn-story-clock connectedCallback called"); // Add this line
+    console.log('cn-story-clock connectedCallback called'); // Add this line
 
-    const ticks = this.querySelectorAll<CnTick>("cn-tick");
+    const ticks = this.querySelectorAll<CnTick>('cn-tick');
     this.ticks = Array.from(ticks);
   }
 
@@ -86,13 +86,13 @@ export class CnStoryClock extends LitElement {
     // Adjust the large-arc-flag calculation
     const largeArcFlag = sliceAngle > 180 ? 1 : 0;
 
-    const classes = ["slice"];
+    const classes = ['slice'];
     if (index < this.value) {
-      classes.push("ticked");
+      classes.push('ticked');
     }
 
     return svg`<path 
-      class="${classes.join(" ")}"
+      class="${classes.join(' ')}"
       d="${`M ${radius} ${radius} L ${x1} ${y1} A ${radius} ${radius} 0 ${largeArcFlag} 1 ${x2} ${y2} Z}`}"
       transform="translate(${offset}, ${offset})"
       key="${index}"></path>`;
@@ -130,11 +130,11 @@ export class CnStoryClock extends LitElement {
       return;
     }
     this.value = this.value >= this.ticks.length ? 0 : this.value + 1;
-    this.dispatchEvent(new Event("change"));
+    this.dispatchEvent(new Event('change'));
   }
 
   private _handleKeydown(event: KeyboardEvent) {
-    if (event.key === "Enter" || event.key === " ") {
+    if (event.key === 'Enter' || event.key === ' ') {
       // Check for 'Enter' or space
       this._handleClick();
     }
