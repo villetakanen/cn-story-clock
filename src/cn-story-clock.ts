@@ -13,6 +13,11 @@ export class CnStoryClock extends LitElement {
   @property({ type: Boolean, reflect: true }) disabled = false;
   @property({ type: Boolean, reflect: true }) required = false;
 
+  // The element supports two modes, "view" and "control". By default, it is in "control" mode.
+  // ---
+  // View makes the element read-only, but does not disable it.
+  @property({ type: Boolean, reflect: true }) view = false;
+
   // The tick list used a as a helper to render and interact with the ticks
   private _ticks = new Array<CnTick>();
 
@@ -53,6 +58,10 @@ export class CnStoryClock extends LitElement {
     }
     .slice.ticked {
       fill: var(--cn-story-clock-tick-color, gray);
+    }
+    :host([disabled]) {
+      pointer-events: none;
+      opacity: 0.5;
     }
   `;
 
@@ -126,7 +135,7 @@ export class CnStoryClock extends LitElement {
   }
 
   private _handleClick() {
-    if (this.disabled) {
+    if (this.disabled || this.view) {
       return;
     }
     this.value = this.value >= this.ticks.length ? 0 : this.value + 1;
