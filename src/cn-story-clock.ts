@@ -6,7 +6,7 @@ import './tokens.css';
 
 @customElement('cn-story-clock')
 export class CnStoryClock extends LitElement {
-  @property({ type: String, reflect: true }) name = '';
+  @property({ type: String, reflect: true }) name = 'A Clock';
   @property({ type: Number, reflect: true }) value = 2;
 
   // These two fields are for form-interaction
@@ -80,6 +80,7 @@ export class CnStoryClock extends LitElement {
     this.setAttribute('role', 'slider');
     this.setAttribute('aria-label', this.name);
     this.setAttribute('aria-valuemin', '2');
+    this.setAttribute('tabindex', '0');
   }
 
   disconnectedCallback() {
@@ -139,10 +140,7 @@ export class CnStoryClock extends LitElement {
   render() {
     return html`
       <div
-        class="clock"
-        tabindex="0" 
-        role="button"
-        aria-label="${this.name}">
+        class="clock">
         ${this.renderClock()}
         <slot @slotchange="${this._onSlotchange}"></slot>
       </div>
