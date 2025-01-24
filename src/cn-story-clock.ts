@@ -178,7 +178,7 @@ export class CnStoryClock extends LitElement {
         // Check if Ctrl key is pressed
         this.value = this.value === 0 ? this.ticks.length - 1 : this.value - 1;
       } else {
-        this.value = (this.value + 1) % this.ticks.length;
+        this.value = (this.value + 1) % (this.ticks.length + 1);
       }
       this.dispatchEvent(new Event('change', { bubbles: true }));
     }
@@ -191,7 +191,7 @@ export class CnStoryClock extends LitElement {
     }
 
     if (event.key === 'Enter' || event.key === ' ' || event.key === 'ArrowUp') {
-      this.value = (this.value + 1) % this.ticks.length;
+      this.value = (this.value + 1) % (this.ticks.length + 1);
       this.dispatchEvent(new Event('change', { bubbles: true }));
     } else if (event.key === 'ArrowDown') {
       this.value = this.value === 0 ? this.ticks.length - 1 : this.value - 1;
