@@ -71,6 +71,17 @@ export class CnStoryClock extends LitElement {
 
     const ticks = this.querySelectorAll<CnTick>('cn-tick');
     this.ticks = Array.from(ticks);
+
+    // Add event listeners to the host element (this)
+    this.addEventListener('click', this._handleClick);
+    this.addEventListener('keydown', this._handleKeydown);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    // Remove event listeners in disconnectedCallback
+    this.removeEventListener('click', this._handleClick);
+    this.removeEventListener('keydown', this._handleKeydown);
   }
 
   getSlicePath(index: number) {
@@ -123,8 +134,6 @@ export class CnStoryClock extends LitElement {
     return html`
       <div
         class="clock"
-        @click="${this._handleClick}" 
-        @keydown="${this._handleKeydown}" 
         tabindex="0" 
         role="button"
         aria-label="${this.name}">
@@ -134,18 +143,35 @@ export class CnStoryClock extends LitElement {
     `;
   }
 
-  private _handleClick() {
+  private _handleClick(event: MouseEvent) {
     if (this.disabled || this.view) {
       return;
     }
-    this.value = this.value >= this.ticks.length ? 0 : this.value + 1;
-    this.dispatchEvent(new Event('change', { bubbles: true }));
+
+    const target = event.target as HTMLElement;
+    if (target === this || target.closest('.clock')) {
+      if (event.shiftKey) {
+        // Check if Ctrl key is pressed
+        this.value = this.value === 0 ? this.ticks.length - 1 : this.value - 1;
+      } else {
+        this.value = (this.value + 1) % this.ticks.length;
+      }
+      this.dispatchEvent(new Event('change', { bubbles: true }));
+    }
   }
 
   private _handleKeydown(event: KeyboardEvent) {
-    if (event.key === 'Enter' || event.key === ' ') {
-      // Check for 'Enter' or space
-      this._handleClick();
+    event.preventDefault();
+    if (this.disabled || this.view) {
+      return;
+    }
+
+    if (event.key === 'Enter' || event.key === ' ' || event.key === 'ArrowUp') {
+      this.value = (this.value + 1) % this.ticks.length;
+      this.dispatchEvent(new Event('change', { bubbles: true }));
+    } else if (event.key === 'ArrowDown') {
+      this.value = this.value === 0 ? this.ticks.length - 1 : this.value - 1;
+      this.dispatchEvent(new Event('change', { bubbles: true }));
     }
   }
 }
