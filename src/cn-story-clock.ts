@@ -1,5 +1,5 @@
 // cn-tick.ts
-import { LitElement, css, html, svg } from 'lit';
+import { LitElement, type PropertyValues, css, html, svg } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import type { CnTick } from './cn-tick';
 import './tokens.css';
@@ -7,7 +7,7 @@ import './tokens.css';
 @customElement('cn-story-clock')
 export class CnStoryClock extends LitElement {
   @property({ type: String, reflect: true }) name = '';
-  @property({ type: Number, reflect: true }) value = 0;
+  @property({ type: Number, reflect: true }) value = 2;
 
   // These two fields are for form-interaction
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -75,6 +75,11 @@ export class CnStoryClock extends LitElement {
     // Add event listeners to the host element (this)
     this.addEventListener('click', this._handleClick);
     this.addEventListener('keydown', this._handleKeydown);
+
+    // Set static ARIA attributes
+    this.setAttribute('role', 'slider');
+    this.setAttribute('aria-label', this.name);
+    this.setAttribute('aria-valuemin', '2');
   }
 
   disconnectedCallback() {
@@ -85,7 +90,8 @@ export class CnStoryClock extends LitElement {
   }
 
   getSlicePath(index: number) {
-    const totalSize = this.ticks.reduce((sum, tick) => sum + tick.size, 0);
+    const ticks = this.ticks.reduce((sum, tick) => sum + tick.size, 0);
+    const totalSize = ticks < 2 ? 2 : ticks;
     let startAngle = 0;
 
     for (let i = 0; i < index; i++) {
@@ -141,6 +147,26 @@ export class CnStoryClock extends LitElement {
         <slot @slotchange="${this._onSlotchange}"></slot>
       </div>
     `;
+  }
+
+  updated(changedProperties: PropertyValues<this>) {
+    super.updated(changedProperties);
+    if (changedProperties.has('disabled')) {
+      this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
+    }
+    if (changedProperties.has('required')) {
+      this.setAttribute('aria-required', this.required ? 'true' : 'false');
+    }
+    if (changedProperties.has('value')) {
+      this.setAttribute('aria-valuenow', this.value.toString());
+      this.setAttribute('aria-valuetext', this._ticks[this.value].label);
+    }
+    // Update aria-valuemax whenever ticks change
+    if (changedProperties.has('ticks')) {
+      const ticks = this.ticks.length;
+      const max = ticks < 2 ? 2 : ticks;
+      this.setAttribute('aria-valuemax', max.toString());
+    }
   }
 
   private _handleClick(event: MouseEvent) {
