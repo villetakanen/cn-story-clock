@@ -19,7 +19,9 @@ export class CnTick extends LitElement {
   _size = 1;
 
   static styles = css`
-    /* @TODO: remove this, if we wont end up using it */
+    :host {
+      display: none;
+    }
   `;
 
   render() {

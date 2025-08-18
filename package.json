@@ -4,21 +4,27 @@
   "description": "A form input custom element for a PbtA style story clock",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vitest",
     "check": "biome check --write",
     "dev": "vite"
+  },
+  "exports": {
+    ".": "./src/index.ts"
   },
   "keywords": [],
   "author": "Ville Takanen",
   "license": "MIT",
-  "devDependencies": {
-    "@biomejs/biome": "1.9.4",
-    "@types/node": "^22.10.5",
-    "typescript": "^5.7.2",
-    "vite": "^6.0.7"
-  },
   "dependencies": {
-    "lit": "^3.2.1",
-    "ts-key-enum": "^3.0.13"
+    "ts-key-enum": "^3.0.13",
+    "lit": "^3.3.1"
+  },
+  "devDependencies": {
+    "@vitest/browser": "^3.2.4",
+    "jsdom": "^26.1.0",
+    "playwright": "^1.54.1",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4",
+    "vitest-browser-lit": "^0.1.0",
+    "cpx": "^1.5.0"
   }
 }

@@ -155,7 +155,7 @@ export class CnStoryClock extends LitElement {
     if (changedProperties.has('required')) {
       this.setAttribute('aria-required', this.required ? 'true' : 'false');
     }
-    if (changedProperties.has('value')) {
+    if (changedProperties.has('value') && this._ticks[this.value]) {
       this.setAttribute('aria-valuenow', this.value.toString());
       this.setAttribute('aria-valuetext', this._ticks[this.value].label);
     }
