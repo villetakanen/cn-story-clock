@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { CnTick } from './cn-tick';
-import { html } from 'lit';
+import type { CnTick } from './cn-tick';
 
 import './cn-tick';
 
@@ -21,7 +20,8 @@ describe('cn-tick', () => {
   });
 
   it('should reflect properties to attributes', async () => {
-    document.body.innerHTML = '<cn-tick label="test label" value="test value" size="2"></cn-tick>';
+    document.body.innerHTML =
+      '<cn-tick label="test label" value="test value" size="2"></cn-tick>';
     const el = document.body.querySelector<CnTick>('cn-tick');
     await customElements.whenDefined('cn-tick');
     expect(el?.getAttribute('label')).toBe('test label');

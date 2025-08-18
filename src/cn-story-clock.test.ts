@@ -1,6 +1,5 @@
-import { describe, expect, it, vi } from 'vitest';
-import { CnStoryClock } from './cn-story-clock';
-import { html } from 'lit';
+import { describe, expect, it } from 'vitest';
+import type { CnStoryClock } from './cn-story-clock';
 
 import './cn-story-clock';
 import './cn-tick';

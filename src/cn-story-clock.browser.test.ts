@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { CnStoryClock } from './cn-story-clock';
-import { html } from 'lit';
+import type { CnStoryClock } from './cn-story-clock';
 
 import './cn-story-clock';
 import './cn-tick';
@@ -21,10 +20,12 @@ describe('cn-story-clock', () => {
     const tickedSlice = slices?.[0];
     const untickedSlice = slices?.[1];
 
-    const tickedStyle = getComputedStyle(tickedSlice!)
-    const untickedStyle = getComputedStyle(untickedSlice!)
+    if (tickedSlice && untickedSlice) {
+      const tickedStyle = getComputedStyle(tickedSlice);
+      const untickedStyle = getComputedStyle(untickedSlice);
 
-    expect(tickedStyle.fill).toBe('rgb(128, 128, 128)'); // gray
-    expect(untickedStyle.fill).toBe('rgb(211, 211, 211)'); // lightgray
+      expect(tickedStyle.fill).toBe('rgb(128, 128, 128)'); // gray
+      expect(untickedStyle.fill).toBe('rgb(211, 211, 211)'); // lightgray
+    }
   });
 });

@@ -1,5 +1,5 @@
 // cn-tick.ts
-import { LitElement, type PropertyValues, css, html, svg } from 'lit';
+import { css, html, LitElement, type PropertyValues, svg } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import type { CnTick } from './cn-tick';
 import './tokens.css';
@@ -19,7 +19,7 @@ export class CnStoryClock extends LitElement {
   @property({ type: Boolean, reflect: true }) view = false;
 
   // The tick list used a as a helper to render and interact with the ticks
-  private _ticks = new Array<CnTick>();
+  private _ticks = [] as CnTick[];
 
   get ticks() {
     return this._ticks;
